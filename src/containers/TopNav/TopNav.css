@@ -1,0 +1,17 @@
+#topnav-logo {
+  width: 60px;
+  height: 60px;
+}
+
+.caret {
+  display: none;
+}
+
+.mb-3 {
+  padding-top: 3%;
+}
+
+#avatar {
+  height: 35%;
+  width: 35%;
+}
