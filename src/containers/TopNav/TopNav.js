@@ -8,24 +8,26 @@ import { items } from '../../databases';
 import Dropdown from '../../components/Dropdown';
 import SearchInput from '../../components/SearchInput';
 
-const TopNav = ({ onSearchChange }) => {
+const TopNav = ({ onSearchChange, user }) => {
   return(
     <div>
       <Navbar bg="light" expand="lg" fixed="top">
         <div className="container">
-          <Navbar.Brand href="#home">
-            <Image
-              src="https://cdn.viblo.asia/_nuxt/img/fbfe575.svg"
-              className="align-top"
-              id="topnav-logo"
-              alt="React Bootstrap logo"
-            />
+          <Navbar.Brand>
+            <Link className="nav-link" to="/">
+              <Image
+                src="https://cdn.viblo.asia/_nuxt/img/fbfe575.svg"
+                className="align-top"
+                id="topnav-logo"
+                alt="React Bootstrap logo"
+              />
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Link class="nav-link" role="button" to="/">Home</Link>
-              <Link class="nav-link" role="button" to="/questions">Questions</Link>
+              <Link className="nav-link" role="button" to="/">Home</Link>
+              <Link className="nav-link" role="button" to="/questions">Questions</Link>
             </Nav>
   
             <Nav className="d-flex flex-row">
@@ -33,7 +35,7 @@ const TopNav = ({ onSearchChange }) => {
               <Dropdown 
                 title={
                   <Image 
-                    src="https://images.viblo.asia/avatar/bc5ac429-ee66-425d-8d3b-caac03c579e5.jpg"
+                    src={ user.avatar_url }
                     alt="avatar"
                     id="avatar"
                   />

@@ -10,7 +10,7 @@ const PostList = ({ posts }) => {
           return(
             <Post 
               key={ post.id }
-              post = { post }
+              post={ post }
             />
           )
         })

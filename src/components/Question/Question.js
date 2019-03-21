@@ -1,22 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import './Post.css';
 import { Row, Col } from 'react-bootstrap';
 
-const Post = ({ author, title, url, numberAnswers }) => {
+const Question = ({ question }) => {
+  const { id, author, title, numberSeen } = question;
+
   return (
     <div>
       <Row>
         <Col md="9">
           { author }
           <br/>
-          <a href={ url } className="post-title">
+          <Link to={`/questions/${id}`} className="post-title">
             { title }
-          </a>
+          </Link>
         </Col>
         <Col md="3">
           <FontAwesomeIcon icon="eye" aria-hidden="true"/>
-          { numberAnswers }
+          { numberSeen }
         </Col>
       </Row>
       <hr/>
@@ -24,4 +27,4 @@ const Post = ({ author, title, url, numberAnswers }) => {
   );
 }
 
-export default Post;
+export default Question;

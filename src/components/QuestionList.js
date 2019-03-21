@@ -10,10 +10,7 @@ const QuestionList = ({ questions }) => {
           return(
             <Question 
               key={ question.id }
-              author={ question.author }
-              title={ question.title }
-              content={ question.content }
-              numberAnswers={ question.numberAnswers }
+              question={ question }
             />
           )
         })
