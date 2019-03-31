@@ -2,26 +2,24 @@ import React from 'react';
 import './Comment.css';
 import { Row, Col, Image } from 'react-bootstrap';
 
-const Comment = ({ comment }) => {
-  const { author, content } = comment;
-
+const Comment = ({ comment, user }) => {
   return (
     <div>
       <Row>
         <Col md="1">
           <Image 
-            src=""
+            src={ user.avatar_url }
             alt="avatar"
             className="author-avatar"
           />
         </Col>
         <Col md="9">
-          { author }
+          { user.name }
           <br/>
         </Col>
       </Row>
       <Row>
-        <p>{ content }</p>
+        <p>{ comment.content }</p>
       </Row>
       <hr/>
     </div>

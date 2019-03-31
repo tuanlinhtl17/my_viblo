@@ -11,28 +11,45 @@ import ShowQuestionPage from './ShowQuestionPage';
 
 import { setSearchField } from '../actions/setSearchField';
 
-import { users, posts, questions, comments } from '../databases';
+import { requestPostsUsers } from '../actions/requestPostsUsers';
+import { destroyPost } from '../actions/destroyPosts';
+
+import { questions } from '../databases';
 
 const mapStateToProps = state => {
   return {
+    posts_pending: state.requestPostsUsers.posts_pending,
     searchField: state.searchData.searchField,
-    users: users,
-    posts: posts,
+    users: state.requestPostsUsers.users,
+    posts: state.requestPostsUsers.posts,
     questions: questions,
-    comments: comments,
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSearchChange: event => dispatch(setSearchField(event.target.value))
+    onSearchChange: event => dispatch(setSearchField(event.target.value)),
+
+    onRequestPostsUsers: () => dispatch(requestPostsUsers()),
+    onDestroyPost: event => dispatch(destroyPost(event.target.value)),
   };
 }
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.onRequestPostsUsers();
+  }
   
   render() {
-    const { searchField, posts, questions, onSearchChange } = this.props;
+    const { 
+      posts_pending,
+      comments_pending, 
+      searchField, 
+      posts, 
+      users, 
+      questions, 
+      onSearchChange } = this.props;
     const filteredPosts = posts.filter(post => {
       return post.title.toLowerCase().includes(searchField.toLowerCase());
     });
@@ -40,64 +57,75 @@ class App extends Component {
       return question.title.toLowerCase().includes(searchField.toLowerCase());
     });
 
-    return (
-      <Router>
+    if(posts_pending || comments_pending || users.lenght === 0 || posts.length === 0) {
+      return (
         <div>
           <LoadingBar />
-          <TopNav onSearchChange={ onSearchChange } user={ users[0] } />
-
-          <Route 
-            path="/" 
-            exact 
-            render={(props) => (
-              <HomePage 
-              {...props} 
-              users={ users }
-              posts={ filteredPosts } 
-              questions={ filteredQuestions } />
-            )} 
-          />
-
-          <Route 
-            path="/posts/:id" 
-            exact 
-            render={(props) => (
-              <ShowPostPage 
-              {...props} 
-              users={ users }
-              posts={ posts } 
-              questions={ filteredQuestions }
-              comments={ comments } />
-            )} 
-          />
-
-          <Route 
-            path="/questions" 
-            exact 
-            render={(props) => (
-              <QuestionPage 
-              {...props} 
-              users={ users }
-              posts={ filteredPosts } 
-              questions={ filteredQuestions } />
-            )} 
-          />
-
-          <Route 
-            path="/questions/:id" 
-            exact 
-            render={(props) => (
-              <ShowQuestionPage 
-              {...props} 
-              users={ users }
-              posts={ filteredPosts } 
-              questions={ questions }
-              comments={ comments } />
-            )} 
-          />
+          {/* <TopNav onSearchChange={ onSearchChange } /> */}
+          <h1>Loading...</h1>
         </div>
-      </Router>
-    );
+      );
+    } else {
+      return (
+        <Router>
+          <div>
+            <LoadingBar />
+            <TopNav onSearchChange={ onSearchChange } user={ users[0] } />
+  
+            <Route 
+              path="/" 
+              exact 
+              render={(props) => (
+                <HomePage 
+                {...props} 
+                users={ users }
+                posts={ filteredPosts } 
+                questions={ filteredQuestions } />
+              )} 
+            />
+  
+            <Route 
+              path="/posts/:id" 
+              exact 
+              render={(props) => (
+                <ShowPostPage 
+                {...props} 
+                users={ users }
+                posts={ posts } 
+                questions={ filteredQuestions }
+                onDestroyPost={ this.props.onDestroyPost } />
+              )} 
+            />
+  
+  
+  
+            <Route 
+              path="/questions" 
+              exact 
+              render={(props) => (
+                <QuestionPage 
+                {...props} 
+                users={ users }
+                posts={ filteredPosts } 
+                questions={ filteredQuestions } />
+              )} 
+            />
+  
+            <Route 
+              path="/questions/:id" 
+              exact 
+              render={(props) => (
+                <ShowQuestionPage 
+                {...props} 
+                users={ users }
+                posts={ filteredPosts } 
+                questions={ questions } />
+              )} 
+            />
+          </div>
+        </Router>
+      );
+    }
   }
 }
 

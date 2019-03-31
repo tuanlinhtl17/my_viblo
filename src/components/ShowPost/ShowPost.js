@@ -1,22 +1,23 @@
 import React from 'react';
 import './ShowPost.css';
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 
-const ShowPost = ({ post }) => {
-  const { author, title, content } = post;
+const ShowPost = ({ post, user, onDestroyPost }) => {
+  const { title, content } = post;
 
   return(
     <Container>
       <Row>
         <Col md="1">
           <Image 
-            src="https://images.viblo.asia/avatar/bc5ac429-ee66-425d-8d3b-caac03c579e5.jpg"
+            src={ user.avatar_url }
             alt="avatar"
             className="author-avatar"
           />
         </Col>
         <Col md="9">
-          { author }
+          { user.name }
+          <Button onClick={ onDestroyPost } value={ post.id } >Delete post</Button>
           <br/>
         </Col>
       </Row>
