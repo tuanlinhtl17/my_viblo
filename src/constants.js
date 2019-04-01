@@ -27,3 +27,5 @@ export const LOADING_BAR_PROMISE_TYPE = [
   CREATE_COMMENT_SUCCESS,
   CREATE_COMMENT_FAIL
 ]
+
+export const BLANK_AVATAR_URL = 'https://zcoin.io/wp-content/uploads/2017/01/blank-avatar-300x300.png'

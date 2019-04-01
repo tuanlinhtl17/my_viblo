@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './ShowPost.css';
 import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 
@@ -31,6 +32,17 @@ const ShowPost = ({ post, user, onDestroyPost }) => {
       </Row>
     </Container>
   )
+}
+
+ShowPost.defaultProps = { 
+  user: {}, 
+  post: {},
+}
+
+ShowPost.propTypes = { 
+  user: PropTypes.object.isRequired, 
+  post: PropTypes.object.isRequired,
+  onDestroyPost: PropTypes.func.isRequired,
 }
 
 export default ShowPost;

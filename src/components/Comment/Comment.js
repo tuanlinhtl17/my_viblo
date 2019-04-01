@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Comment.css';
 import { Row, Col, Image } from 'react-bootstrap';
 
@@ -24,6 +25,16 @@ const Comment = ({ comment, user }) => {
       <hr/>
     </div>
   );
+}
+
+Comment.defaultProps = { 
+  user: {},
+  comment: {},
+}
+
+Comment.propTypes = { 
+  user: PropTypes.object.isRequired,
+  comment: PropTypes.object.isRequired,
 }
 
 export default Comment;

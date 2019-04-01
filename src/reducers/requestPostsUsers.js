@@ -5,7 +5,6 @@ import {
 } from '../constants';
 
 const initialState = {
-  posts_pending: false,
   users: [],
   posts: [],
   error: ''

@@ -1,23 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './Post.css';
 import { Row, Col, Image } from 'react-bootstrap';
 
-const Post = ({ post }) => {
-  const { author, title, id } = post;
+const Post = ({ user, post }) => {
+  const { title, id } = post;
 
   return (
     <div>
       <Row>
         <Col md="1">
           <Image 
-            src="https://images.viblo.asia/avatar/bc5ac429-ee66-425d-8d3b-caac03c579e5.jpg"
+            src={ user.avatar_url }
             alt="avatar"
             className="author-avatar"
           />
         </Col>
         <Col md="9">
-          { author }
+          { user.name }
           <br/>
           <Link to={`/posts/${id}`} className="post-title">
             { title }
@@ -28,5 +29,15 @@ const Post = ({ post }) => {
     </div>
   );
 }
+
+Post.defaultProps = {
+  user: {},
+  post: {},
+}
+
+Post.propTypes = {
+  user: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired,
+};
 
 export default Post;

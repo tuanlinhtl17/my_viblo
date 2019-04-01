@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
 
 const CommentForm = ({ onSubmit, dataID }) => {
@@ -13,6 +14,15 @@ const CommentForm = ({ onSubmit, dataID }) => {
       </Button>
     </Form>
   );
+}
+
+CommentForm.defaultProps = {
+  dataID: '1'
+}
+
+CommentForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  dataID: PropTypes.string.isRequired,
 }
 
 export default CommentForm;

@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavDropdown } from 'react-bootstrap';
 
-const Dropdown = ({title = '', id = '', className = '', items = []}) => {
+const Dropdown = ({title, id, className, items}) => {
   return(
     <NavDropdown 
       title={title}
@@ -17,6 +18,20 @@ const Dropdown = ({title = '', id = '', className = '', items = []}) => {
       }
     </NavDropdown>
   );
+}
+
+Dropdown.defaultProps = {
+  title: '', 
+  id: '', 
+  className: '', 
+  items: []
+}
+
+Dropdown.propTypes = {
+  title: PropTypes.string, 
+  id: PropTypes.string, 
+  className: PropTypes.string, 
+  items: PropTypes.array  
 }
 
 export default Dropdown;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Form, InputGroup, FormControl, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -15,6 +16,10 @@ const SearchInput = ({ onSearchChange }) => {
       </InputGroup>
     </Form>
   );
+}
+
+SearchInput.propTypes = {
+  onSearchChange: PropTypes.func
 }
 
 export default SearchInput;

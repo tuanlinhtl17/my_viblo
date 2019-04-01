@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LoadingBar from 'react-redux-loading-bar';
+import PropTypes from 'prop-types';
 
 import TopNav from './TopNav/TopNav';
 import HomePage from './HomePage';
@@ -57,11 +58,10 @@ class App extends Component {
       return question.title.toLowerCase().includes(searchField.toLowerCase());
     });
 
-    if(posts_pending || comments_pending || users.lenght === 0 || posts.length === 0) {
+    if(posts_pending || comments_pending || users.length === 0 || posts.length === 0) {
       return (
         <div>
           <LoadingBar />
-          {/* <TopNav onSearchChange={ onSearchChange } /> */}
           <h1>Loading...</h1>
         </div>
       );
@@ -128,5 +128,23 @@ class App extends Component {
     }
   }
 }
+
+App.defaultProps = {
+  posts_pending: false,
+  comments_pending: false,
+  searchField: '',
+  users: [],
+  posts: [],
+  questions: [],
+}
+
+App.propTypes = {
+  posts_pending: PropTypes.bool,
+  comments_pending: PropTypes.bool,
+  searchField: PropTypes.string,
+  users: PropTypes.array,
+  posts: PropTypes.array,
+  questions: PropTypes.array,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

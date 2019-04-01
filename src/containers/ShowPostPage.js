@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Container, Col, Row } from 'react-bootstrap';
 
 import ShowPost from '../components/ShowPost/ShowPost';
@@ -27,7 +28,7 @@ const mapDispatchToProps = () => {
 }
 
 class ShowPostPage extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.onRequestComments(this.props.match.params.id);
   }
 
@@ -58,6 +59,22 @@ class ShowPostPage extends Component {
       </div>
     );
   }
+}
+
+ShowPostPage.defaultProps = { 
+  users: [], 
+  posts: [], 
+  questions: [], 
+  comments: [],
+}
+
+ShowPostPage.propTypes = { 
+  users: PropTypes.array.isRequired, 
+  posts: PropTypes.array.isRequired, 
+  questions: PropTypes.array.isRequired, 
+  comments: PropTypes.array.isRequired, 
+  onDestroyPost: PropTypes.func.isRequired, 
+  onCreateComment: PropTypes.func.isRequired 
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowPostPage);

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar, Image } from 'react-bootstrap';
 import './TopNav.css';
@@ -7,6 +8,7 @@ import { items } from '../../databases';
 
 import Dropdown from '../../components/Dropdown';
 import SearchInput from '../../components/SearchInput';
+import { BLANK_AVATAR_URL } from '../../constants';
 
 const TopNav = ({ onSearchChange, user }) => {
   return(
@@ -48,6 +50,18 @@ const TopNav = ({ onSearchChange, user }) => {
       </Navbar>
     </div>
   );
+}
+
+TopNav.propTypes = {
+  onSearchChange: PropTypes.func,
+  user: PropTypes.object,
+}
+
+TopNav.defaultProps = {
+  user: {
+    name: 'Anonymous',
+    avatar_url: BLANK_AVATAR_URL
+  }
 }
 
 export default TopNav;
